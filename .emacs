@@ -27,7 +27,7 @@
  '(font-lock-maximum-decoration t)
  '(package-selected-packages
    (quote
-    (string-inflection inf-ruby yasnippet-classic-snippets yasnippet-snippets yasnippet rspec-mode yaml-mode enh-ruby-mode auto-complete projectile tide company typescript-mode js2-mode web-mode ## dash)))
+    (robe string-inflection inf-ruby yasnippet-classic-snippets yasnippet-snippets yasnippet rspec-mode yaml-mode enh-ruby-mode auto-complete projectile tide company typescript-mode js2-mode web-mode ## dash)))
  '(truncate-lines t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -39,6 +39,9 @@
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
+;; for viewing slim files
+(require 'slim-mode)
 
 ;; enable winner mode
 (when (fboundp 'winner-mode)
@@ -132,6 +135,10 @@
   '(rspec-install-snippets))
 (add-hook 'after-init-hook 'inf-ruby-auto-enter)
 (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
+
+;; ruby completions
+(add-hook 'ruby-mode-hook 'enh-ruby-mode)
+(add-hook 'enh-ruby-mode-hook 'robe-mode)
 
 ;; yasnippet
 (add-to-list 'load-path
